@@ -236,30 +236,35 @@ export const ParticleText = ({
         line3: { type: "text", default: words[2] ?? DEFAULT_WORDS[2] },
       },
       text: {
-        letterGap: [1.2, 0.6, 2.5, 0.1] as [number, number, number, number],
-        maxWidth: [0.7, 0.5, 0.9, 0.01] as [number, number, number, number],
+        letterGap: [0.9, 0.6, 2.5, 0.1] as [number, number, number, number],
+        maxWidth: [0.5, 0.5, 0.9, 0.01] as [number, number, number, number],
         verticalDetail: false,
       },
       ring: {
         width: [0.85, 0.65, 0.98, 0.01] as [number, number, number, number],
-        height: [0.55, 0.42, 0.78, 0.01] as [number, number, number, number],
+        height: [0.5, 0.42, 0.78, 0.01] as [number, number, number, number],
         yOffset: [-8, -80, 80, 1] as [number, number, number, number],
-        bandSpread: [0.026, 0, 0.06, 0.001] as [number, number, number, number],
-        sideScatter: [0.04, 0, 0.18, 0.001] as [number, number, number, number],
+        bandSpread: [0.031, 0, 0.06, 0.001] as [number, number, number, number],
+        sideScatter: [0.033, 0, 0.18, 0.001] as [
+          number,
+          number,
+          number,
+          number,
+        ],
       },
       particles: {
         color: { type: "color", default: "#000000" },
       },
       motion: {
         loop: true,
-        duration: [8.1, 3, 12, 0.1] as [number, number, number, number],
-        staggerIn: [0.27, 0, 0.5, 0.01] as [number, number, number, number],
-        staggerOut: [0.2, 0, 0.6, 0.01] as [number, number, number, number],
+        duration: [8.5, 3, 12, 0.1] as [number, number, number, number],
+        staggerIn: [0.4, 0, 0.5, 0.01] as [number, number, number, number],
+        staggerOut: [0.35, 0, 0.6, 0.01] as [number, number, number, number],
       },
       reset: { type: "action", label: "Reset to Defaults" },
     },
     {
-      id: "particle-text-v3",
+      id: "particle-text-v4",
       persist: true,
       onAction: (path) => {
         if (path !== "reset") return;
