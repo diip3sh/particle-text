@@ -21,7 +21,7 @@ const TIMELINE_SECONDS = 6.5;
 
 const BACKGROUND_STYLE =
   "radial-gradient(ellipse farthest-corner at center, #F6FF01 0%, #F6FF01 24%, #EFF975 55%, #D4D68A 100%)";
-const MOVE_EASE = [0.77, 0, 0.175, 1] as const;
+const MOVE_EASE = [0.22, 0.291, 0.355, 1] as const;
 
 type ParticleTextProps = {
   words?: string[];
@@ -87,10 +87,15 @@ type Schedule = {
 };
 
 const SCHEDULES: Schedule[] = [
-  { idleEnd: 0.8, textIn: 1.45, textOut: 2.35, homeBack: 3.08 },
-  { idleEnd: 2.32, textIn: 3.12, textOut: 3.58, homeBack: 4.28 },
-  { idleEnd: 3.55, textIn: 4.35, textOut: 5.25, homeBack: 6.12 },
+  { idleEnd: 0.8, textIn: 1.45, textOut: 2.25, homeBack: 3.08 },
+  { idleEnd: 2.32, textIn: 3.12, textOut: 3.52, homeBack: 4.28 },
+  { idleEnd: 3.55, textIn: 4.25, textOut: 4.95, homeBack: 6.02 },
 ];
+// const SCHEDULES: Schedule[] = [
+//   { idleEnd: 0.8, textIn: 1.45, textOut: 2.35, homeBack: 3.08 },
+//   { idleEnd: 2.32, textIn: 3.12, textOut: 3.58, homeBack: 4.28 },
+//   { idleEnd: 3.55, textIn: 4.35, textOut: 5.25, homeBack: 6.12 },
+// ];
 
 const getCenteredLeft = (target: Target) => target.x - target.w / 2;
 const getCenteredTop = (target: Target) => target.y - target.s / 2;
@@ -328,6 +333,15 @@ export const ParticleText = ({
       }),
     [dialWords, targetOptions],
   );
+  const animationKey = useMemo(
+    () =>
+      JSON.stringify({
+        layoutKey,
+        duration: dial.motion.duration,
+        loop: dial.motion.loop,
+      }),
+    [dial.motion.duration, dial.motion.loop, layoutKey],
+  );
 
   useEffect(() => {
     dialControllerRef.current = dialController;
@@ -377,7 +391,7 @@ export const ParticleText = ({
           if (shouldReduceMotion) {
             return (
               <span
-                key={`${layoutKey}-${particle.id}`}
+                key={`${animationKey}-${particle.id}`}
                 aria-hidden="true"
                 className="absolute left-0 top-0 block rounded-full"
                 style={{
@@ -395,7 +409,7 @@ export const ParticleText = ({
 
           return (
             <motion.span
-              key={`${layoutKey}-${particle.id}`}
+              key={`${animationKey}-${particle.id}`}
               aria-hidden="true"
               className="absolute left-0 top-0 block rounded-full will-change-transform"
               style={{ backgroundColor: dial.particles.color }}
